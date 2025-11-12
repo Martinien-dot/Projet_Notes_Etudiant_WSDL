@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-etudiants
+    environment:
+      POSTGRES_DB: etudiant_notes_db
+      POSTGRES_USER: etudiant_notes_user
+      POSTGRES_PASSWORD: etudiant_notes_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - etudiant-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-etudiants
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@etudiant.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    networks:
+      - etudiant-network
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+
+networks:
+  etudiant-network:
+    driver: bridge
