@@ -40,4 +40,4 @@ Ce projet s'inscrit dans le cadre du cours de Web Services du dernier semestre d
 - **Swing** pour l'interface client
 - **Maven** pour la gestion des dépendances
 
-## Structure du Projet
+
